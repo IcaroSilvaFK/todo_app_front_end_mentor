@@ -161,7 +161,7 @@ export const NavigationMobile = styled.nav`
 
 export const Footer = styled.footer`
   text-align: center;
-  margin-top: 38px;
+  padding: 38px 0;
 
   color: ${({ theme }) => theme.colors.neutrals.thin};
 `;

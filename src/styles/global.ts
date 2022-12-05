@@ -11,6 +11,17 @@ export const GlobalCSS = createGlobalStyle`
     background: ${({ theme }) => theme.colors.neutrals.primary};
     width: 100%;
     height: 100%;
+
+    scroll-behavior: smooth;
+
+    &::-webkit-scrollbar {
+      background:transparent;
+      width: 10px
+    }
+    &::-webkit-scrollbar-thumb {
+      background:${({ theme }) => theme.colors.neutrals.semi};
+      border-radius: 20px;
+    }
   } 
 
   body,button,input,textarea{

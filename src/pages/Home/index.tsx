@@ -23,6 +23,7 @@ import { Footer } from '../../components/Footer';
 import { toast } from 'react-toastify';
 import { useForm } from '../../hooks/useForm';
 import { useTabs } from '../../hooks/useTabs';
+import { useEffect } from 'react';
 
 type Todos = {
   id: string;
@@ -35,7 +36,20 @@ export function Home() {
   const [parentRef] = useAutoAnimate<HTMLDivElement>();
   const [tabOpen, handleChangeTab] = useTabs();
   const [inputRef, handleSubmit] = useForm();
-  const [filterdsTodos] = useAtom(todosFiltredsAtom);
+  const [filterdsTodos, setTodosFiltereds] = useAtom(todosFiltredsAtom);
+  const [todos, setTodos] = useAtom(todosAtom);
+
+  useEffect(() => {
+    if (tabOpen === 'all') {
+      setTodosFiltereds(todos);
+    }
+    if (tabOpen === 'active') {
+      setTodosFiltereds(todos.filter((todo) => todo.active));
+    }
+    if (tabOpen === 'completed') {
+      setTodosFiltereds(todos.filter((todo) => !todo.active));
+    }
+  }, [tabOpen, todos]);
 
   function toggleTheme() {
     // setSelectedTheme(selectedTheme === 'dark' ? 'light' : 'dark');
@@ -70,11 +84,7 @@ export function Home() {
         </Form>
 
         <Content ref={parentRef}>
-          {filterdsTodos.length ? (
-            <Todos tabOpen={tabOpen} />
-          ) : (
-            <EmptyComponent />
-          )}
+          {filterdsTodos.length && <Todos />}
           <Footer changeTab={handleChangeTab} tabOpen={tabOpen} />
         </Content>
         <NavigationMobile>

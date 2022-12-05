@@ -8,26 +8,9 @@ import { ListItem } from './styles';
 import { todosAtom, todosFiltredsAtom } from '../../atoms';
 import { useEffect } from 'react';
 
-interface ITodosProps {
-  tabOpen: 'all' | 'active' | 'completed';
-}
-
-export function Todos({ tabOpen }: ITodosProps) {
+export function Todos() {
   const [todos, setTodos] = useAtom(todosAtom);
   const [filterdsTodos, setTodosFiltereds] = useAtom(todosFiltredsAtom);
-
-  useEffect(() => {
-    if (tabOpen === 'all') {
-      console.log('a');
-      setTodosFiltereds(todos);
-    }
-    if (tabOpen === 'active') {
-      setTodosFiltereds(todos.filter((todo) => todo.active));
-    }
-    if (tabOpen === 'completed') {
-      setTodosFiltereds(todos.filter((todo) => !todo.active));
-    }
-  }, [tabOpen, todos]);
 
   function handleCompleteTodo(id: string) {
     const updatedTodos = todos.map((todo) =>

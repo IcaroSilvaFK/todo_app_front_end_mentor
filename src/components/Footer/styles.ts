@@ -17,6 +17,12 @@ export const Container = styled.footer`
       align-items: center;
       gap: 22px;
 
+      li.active {
+        button {
+          color: ${({ theme }) => theme.colors.brightBlue};
+        }
+      }
+
       button {
         background: transparent;
         color: ${({ theme }) => theme.colors.neutrals.semi};

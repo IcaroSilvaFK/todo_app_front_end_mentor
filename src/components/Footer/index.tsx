@@ -18,7 +18,6 @@ interface IFooterProps {
 
 export function Footer({ tabOpen, changeTab }: IFooterProps) {
   const [todos, setTodos] = useAtom(todosAtom);
-
   const [filterdsTodos] = useAtom(todosFiltredsAtom);
 
   function handleClearCompletedTodos() {
