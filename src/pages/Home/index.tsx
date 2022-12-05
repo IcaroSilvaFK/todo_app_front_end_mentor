@@ -22,9 +22,7 @@ import { EmptyComponent } from '../../components/EmptyComponent';
 import { Footer } from '../../components/Footer';
 import { toast } from 'react-toastify';
 import { useForm } from '../../hooks/useForm';
-import { useFilter } from '../../hooks/useFilter';
 import { useTabs } from '../../hooks/useTabs';
-import { useState } from 'react';
 
 type Todos = {
   id: string;
@@ -38,14 +36,6 @@ export function Home() {
   const [tabOpen, handleChangeTab] = useTabs();
   const [inputRef, handleSubmit] = useForm();
   const [filterdsTodos] = useAtom(todosFiltredsAtom);
-  const [
-    isEmpty,
-    {
-      handleSetFilterFromActive,
-      handleSetFilterFromCompleted,
-      handleSetIsEmpty,
-    },
-  ] = useFilter();
 
   function toggleTheme() {
     // setSelectedTheme(selectedTheme === 'dark' ? 'light' : 'dark');
@@ -80,14 +70,13 @@ export function Home() {
         </Form>
 
         <Content ref={parentRef}>
-          {!isEmpty ? <Todos tabOpen={tabOpen} /> : <EmptyComponent />}
+          {filterdsTodos.length ? (
+            <Todos tabOpen={tabOpen} />
+          ) : (
+            <EmptyComponent />
+          )}
           {!filterdsTodos.length && <EmptyComponent />}
-          <Footer
-            setIsEmpty={handleSetIsEmpty}
-            filterFromActive={handleSetFilterFromActive}
-            filterFromCompleted={handleSetFilterFromCompleted}
-            tabOpen={tabOpen}
-          />
+          <Footer changeTab={handleChangeTab} tabOpen={tabOpen} />
         </Content>
         <NavigationMobile>
           <ul>

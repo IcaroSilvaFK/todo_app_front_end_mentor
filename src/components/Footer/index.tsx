@@ -11,20 +11,12 @@ type Todos = {
   content: string;
   active: boolean;
 };
-
 interface IFooterProps {
-  setIsEmpty(): void;
-  filterFromActive(): void;
-  filterFromCompleted(): void;
   tabOpen: TabOpen;
+  changeTab: (tab: 'all' | 'active' | 'completed') => void;
 }
 
-export function Footer({
-  filterFromActive,
-  filterFromCompleted,
-  setIsEmpty,
-  tabOpen,
-}: IFooterProps) {
+export function Footer({ tabOpen, changeTab }: IFooterProps) {
   const [todos, setTodos] = useAtom(todosAtom);
 
   const [filterdsTodos] = useAtom(todosFiltredsAtom);
@@ -40,13 +32,13 @@ export function Footer({
       <nav>
         <ul>
           <li className={tabOpen === 'all' ? 'active' : ''}>
-            <button onClick={setIsEmpty}>All</button>
+            <button onClick={() => changeTab('all')}>All</button>
           </li>
           <li className={tabOpen === 'active' ? 'active' : ''}>
-            <button onClick={filterFromActive}>Active</button>
+            <button onClick={() => changeTab('active')}>Active</button>
           </li>
           <li className={tabOpen === 'completed' ? 'active' : ''}>
-            <button onClick={filterFromCompleted}>Completed</button>
+            <button onClick={() => changeTab('completed')}>Completed</button>
           </li>
         </ul>
       </nav>

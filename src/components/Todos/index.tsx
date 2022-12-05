@@ -18,6 +18,7 @@ export function Todos({ tabOpen }: ITodosProps) {
 
   useEffect(() => {
     if (tabOpen === 'all') {
+      console.log('a');
       setTodosFiltereds(todos);
     }
     if (tabOpen === 'active') {
