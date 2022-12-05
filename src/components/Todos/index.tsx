@@ -6,7 +6,6 @@ import Cross from '../../assets/svgs/icon-cross.svg';
 
 import { ListItem } from './styles';
 import { todosAtom, todosFiltredsAtom } from '../../atoms';
-import { useEffect } from 'react';
 
 export function Todos() {
   const [todos, setTodos] = useAtom(todosAtom);

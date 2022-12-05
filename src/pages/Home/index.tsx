@@ -37,7 +37,7 @@ export function Home() {
   const [tabOpen, handleChangeTab] = useTabs();
   const [inputRef, handleSubmit] = useForm();
   const [filterdsTodos, setTodosFiltereds] = useAtom(todosFiltredsAtom);
-  const [todos, setTodos] = useAtom(todosAtom);
+  const [todos] = useAtom(todosAtom);
 
   useEffect(() => {
     if (tabOpen === 'all') {
@@ -85,6 +85,7 @@ export function Home() {
 
         <Content ref={parentRef}>
           {!!filterdsTodos.length && <Todos />}
+          {!filterdsTodos.length && <EmptyComponent />}
           <Footer changeTab={handleChangeTab} tabOpen={tabOpen} />
         </Content>
         <NavigationMobile>
