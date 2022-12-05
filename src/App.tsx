@@ -1,34 +1,22 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import { ThemeProvider } from 'styled-components';
+import { useAtom } from 'jotai';
+import { ToastContainer } from 'react-toastify';
 
-function App() {
-  const [count, setCount] = useState(0)
+import { themeSelectedAtom } from './atoms';
+import { theme } from './styles/theme';
+import { Home } from './pages/Home';
+import { GlobalCSS } from './styles/global';
+
+import 'react-toastify/dist/ReactToastify.css';
+
+export function App() {
+  const [selectedTheme] = useAtom(themeSelectedAtom);
 
   return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
-  )
+    <ThemeProvider theme={theme[selectedTheme]}>
+      <GlobalCSS />
+      <Home />
+      <ToastContainer />
+    </ThemeProvider>
+  );
 }
-
-export default App
