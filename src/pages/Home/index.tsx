@@ -75,7 +75,6 @@ export function Home() {
           ) : (
             <EmptyComponent />
           )}
-          {!filterdsTodos.length && <EmptyComponent />}
           <Footer changeTab={handleChangeTab} tabOpen={tabOpen} />
         </Content>
         <NavigationMobile>
