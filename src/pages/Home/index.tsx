@@ -84,7 +84,7 @@ export function Home() {
         </Form>
 
         <Content ref={parentRef}>
-          {filterdsTodos.length && <Todos />}
+          {!!filterdsTodos.length && <Todos />}
           <Footer changeTab={handleChangeTab} tabOpen={tabOpen} />
         </Content>
         <NavigationMobile>
